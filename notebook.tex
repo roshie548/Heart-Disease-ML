@@ -1,0 +1,1428 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Heart Disease ML}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+        \PY{k+kn}{import} \PY{n+nn}{eli5}
+        \PY{k+kn}{from} \PY{n+nn}{eli5}\PY{n+nn}{.}\PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{PermutationImportance}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{input/heart.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    age  sex  cp  trestbps  chol  fbs  restecg  thalach  exang  oldpeak  slope  \textbackslash{}
+        0   63    1   3       145   233    1        0      150      0      2.3      0   
+        1   37    1   2       130   250    0        1      187      0      3.5      0   
+        2   41    0   1       130   204    0        0      172      0      1.4      2   
+        3   56    1   1       120   236    0        1      178      0      0.8      2   
+        4   57    0   0       120   354    0        1      163      1      0.6      2   
+        
+           ca  thal  target  
+        0   0     1       1  
+        1   0     2       1  
+        2   0     2       1  
+        3   0     2       1  
+        4   0     2       1  
+\end{Verbatim}
+            
+    \section{Attributes}\label{attributes}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Age
+\item
+  Sex
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  0 = female
+\item
+  1 = make
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Chest pain type (cp)
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  1 = typical angina
+\item
+  2 = atypical angina
+\item
+  3 = non-anginal pain
+\item
+  4 = asymptomatic
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Resting blood presure (trestbps)
+\item
+  Serum cholestoral in mg/dl (chol)
+\item
+  Fasting blood sugar \textgreater{} 120 mg/dl (fbs)
+\item
+  Resting electrocardiographic results (restecg)
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Values 0-2
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Maximum heart rate achieved (thalach)
+\item
+  Exercise induced angina (exang)
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  1 = yes; 0 = no
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  ST depression induced by exercise relative to rest (oldpeak)
+\item
+  Slope of the peak exercise ST segment (slope)
+\item
+  Number of major vessels colored by flourosopy
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  0-3
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  thal
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  3 = normal
+\item
+  6 = fixed defect
+\item
+  7 = reversable defect
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+  target (Heart disease)
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  0 = no
+\item
+  1 = yes
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}      age  sex  cp  trestbps  chol  fbs  restecg  thalach  exang  oldpeak  \textbackslash{}
+        273   58    1   0       100   234    0        1      156      0      0.1   
+        181   65    0   0       150   225    0        0      114      0      1.0   
+        103   42    1   2       120   240    1        1      194      0      0.8   
+        
+             slope  ca  thal  target  
+        273      2   1     3       0  
+        181      1   3     3       0  
+        103      0   0     3       1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 1    165
+        0    138
+        Name: target, dtype: int64
+\end{Verbatim}
+            
+    \section{Exploratory Data Analysis:}\label{exploratory-data-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} int64      13
+        float64     1
+        dtype: int64
+\end{Verbatim}
+            
+    \paragraph{\texorpdfstring{Since some of the attributes have multiple
+categories, we will use \emph{one-hot encoding} to get rid of any
+unwanted bias that could arise from arbitrary numbering of
+categories}{Since some of the attributes have multiple categories, we will use one-hot encoding to get rid of any unwanted bias that could arise from arbitrary numbering of categories}}\label{since-some-of-the-attributes-have-multiple-categories-we-will-use-one-hot-encoding-to-get-rid-of-any-unwanted-bias-that-could-arise-from-arbitrary-numbering-of-categories}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape:  (303, 14)
+
+    \end{Verbatim}
+
+    \paragraph{Now we will create our training and testing sets from the
+dataframe}\label{now-we-will-create-our-training-and-testing-sets-from-the-dataframe}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{train}\PY{p}{,} \PY{n}{test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.30}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train Shape: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Shape: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train Shape:  (212, 14)
+Test Shape:  (91, 14)
+
+    \end{Verbatim}
+
+    \paragraph{We've dealt with categorical variables, so we can start
+looking for correlations between each attribute and the
+target}\label{weve-dealt-with-categorical-variables-so-we-can-start-looking-for-correlations-between-each-attribute-and-the-target}
+
+We'll start by looking at the Pearson correlation coefficients to give
+us an idea of possible relationships
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{corr\PYZus{}matrix} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         \PY{n}{correlations} \PY{o}{=} \PY{n}{corr\PYZus{}matrix}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Correlations (Most negative to most positive): }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{correlations}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Correlations (Most negative to most positive): 
+ exang      -0.464248
+oldpeak    -0.433180
+ca         -0.426944
+thal       -0.390069
+sex        -0.298758
+age        -0.224143
+chol       -0.053322
+trestbps   -0.053108
+fbs         0.038448
+restecg     0.083150
+slope       0.344297
+thalach     0.403860
+cp          0.433499
+target      1.000000
+Name: target, dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{top\PYZus{}corr\PYZus{}features} \PY{o}{=} \PY{n}{corr\PYZus{}matrix}\PY{o}{.}\PY{n}{index}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{top\PYZus{}corr\PYZus{}features}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \section{Base Random Forest}\label{base-random-forest}
+
+\paragraph{We'll start off with a random forest classifier, which is an
+ensemble algorithm that works through bootstrap aggregating, or bagging.
+Let's see how the classifier performs without any hyperparameter
+tuning.}\label{well-start-off-with-a-random-forest-classifier-which-is-an-ensemble-algorithm-that-works-through-bootstrap-aggregating-or-bagging.-lets-see-how-the-classifier-performs-without-any-hyperparameter-tuning.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{rfc} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+         \PY{n}{rfc}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{pred} \PY{o}{=} \PY{n}{rfc}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{accuracy} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy:  0.8241758241758241
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \section{Random Search Cross
+Validation}\label{random-search-cross-validation}
+
+    \paragraph{We want to choose our hyperparameters in a way that the
+classifier is as accurate as can be. We'll do this through Randomized
+Search Cross Validation, by performing K-Fold
+CV.}\label{we-want-to-choose-our-hyperparameters-in-a-way-that-the-classifier-is-as-accurate-as-can-be.-well-do-this-through-randomized-search-cross-validation-by-performing-k-fold-cv.}
+
+    \paragraph{First, we'll create a parameter grid which we can sample from
+while fitting our
+model}\label{first-well-create-a-parameter-grid-which-we-can-sample-from-while-fitting-our-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{RandomizedSearchCV}
+         
+         \PY{k+kn}{from} \PY{n+nn}{pprint} \PY{k}{import} \PY{n}{pprint}
+         
+         \PY{n}{n\PYZus{}estimators} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{start}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{stop}\PY{o}{=}\PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{num}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{]}
+         \PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{num}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{]}
+         \PY{n}{max\PYZus{}depth}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{k+kc}{None}\PY{p}{)}
+         \PY{n}{min\PYZus{}samples\PYZus{}split} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{min\PYZus{}samples\PYZus{}leaf} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{max\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{auto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqrt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{bootstrap} \PY{o}{=} \PY{p}{[}\PY{k+kc}{True}\PY{p}{,} \PY{k+kc}{False}\PY{p}{]}
+         
+         \PY{n}{random\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}estimators}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{n\PYZus{}estimators}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{max\PYZus{}depth}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min\PYZus{}samples\PYZus{}split}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{min\PYZus{}samples\PYZus{}split}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min\PYZus{}samples\PYZus{}leaf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{min\PYZus{}samples\PYZus{}leaf}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{max\PYZus{}features}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bootstrap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{bootstrap}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{pprint}\PY{p}{(}\PY{n}{random\PYZus{}grid}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'bootstrap': [True, False],
+ 'max\_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, None],
+ 'max\_features': ['auto', 'sqrt'],
+ 'min\_samples\_leaf': [2, 5, 10, 50, 100, 200, 500],
+ 'min\_samples\_split': [2, 5, 10, 50, 100, 200, 500],
+ 'n\_estimators': [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000]\}
+
+    \end{Verbatim}
+
+    \paragraph{Now we can create the RandomizedSearchCV and fit it. We'll
+use a new base model to tune our hyperparameters. We will then perform a
+random search of parameters with 3 fold cross validation, searching 100
+different combinations. Afterwards, we'll look at the resulting best
+parameters.}\label{now-we-can-create-the-randomizedsearchcv-and-fit-it.-well-use-a-new-base-model-to-tune-our-hyperparameters.-we-will-then-perform-a-random-search-of-parameters-with-3-fold-cross-validation-searching-100-different-combinations.-afterwards-well-look-at-the-resulting-best-parameters.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{base\PYZus{}rfc} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{rfc\PYZus{}random} \PY{o}{=} \PY{n}{RandomizedSearchCV}\PY{p}{(}\PY{n}{estimator}\PY{o}{=}\PY{n}{base\PYZus{}rfc}\PY{p}{,} \PY{n}{param\PYZus{}distributions}\PY{o}{=}\PY{n}{random\PYZus{}grid}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{rfc\PYZus{}random}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 3 folds for each of 100 candidates, totalling 300 fits
+[CV] n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV] n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV] n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV] n\_estimators=200, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=True, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=True, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=True, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=True, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=True, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False, total=   2.9s
+[CV] n\_estimators=1000, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False, total=   2.9s
+[CV] n\_estimators=1000, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False, total=   2.9s
+[CV] n\_estimators=1000, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=200, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=True, total=   0.6s
+[CV] n\_estimators=1000, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1000, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=auto, max\_depth=20, bootstrap=False, total=   2.3s
+[CV] n\_estimators=1000, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1000, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=auto, max\_depth=20, bootstrap=False, total=   2.2s
+[CV] n\_estimators=1000, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1000, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=auto, max\_depth=20, bootstrap=False, total=   2.4s
+[CV] n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1000, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.6s
+[CV] n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1000, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.8s
+[CV] n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1000, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.6s
+[CV] n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=auto, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=70, bootstrap=True, total=   3.0s
+[CV] n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=auto, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=auto, max\_depth=70, bootstrap=False, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=auto, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=70, bootstrap=True, total=   3.1s
+[CV] n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=auto, max\_depth=70, bootstrap=False, total=   0.6s
+[CV] n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=auto, max\_depth=70, bootstrap=False, total=   0.7s
+[CV] n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=70, bootstrap=True, total=   3.3s
+[CV] n\_estimators=800, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=50, bootstrap=True, total=   3.8s
+[CV] n\_estimators=800, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=50, bootstrap=True, total=   3.9s
+[CV] n\_estimators=800, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=50, bootstrap=True, total=   3.8s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   2.2s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   2.1s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   2.1s
+[CV] n\_estimators=800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.2s
+[CV] n\_estimators=800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.2s
+[CV] n\_estimators=800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.0s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=500, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=60, bootstrap=False, total=   1.8s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=500, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=60, bootstrap=False, total=   1.9s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=500, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=60, bootstrap=False, total=   1.8s
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=20, bootstrap=True 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=-1)]: Done  33 tasks      | elapsed:   18.5s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=500, max\_features=auto, max\_depth=90, bootstrap=True, total=   1.5s
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=500, max\_features=auto, max\_depth=90, bootstrap=True, total=   1.5s
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=20, bootstrap=True 
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=500, max\_features=auto, max\_depth=90, bootstrap=True, total=   1.4s
+[CV] n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   2.7s
+[CV] n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   3.1s
+[CV] n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   3.2s
+[CV] n\_estimators=800, min\_samples\_split=200, min\_samples\_leaf=500, max\_features=auto, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=200, min\_samples\_leaf=500, max\_features=auto, max\_depth=30, bootstrap=True, total=   2.4s
+[CV] n\_estimators=800, min\_samples\_split=200, min\_samples\_leaf=500, max\_features=auto, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=True, total=   5.6s
+[CV] n\_estimators=800, min\_samples\_split=200, min\_samples\_leaf=500, max\_features=auto, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=200, min\_samples\_leaf=500, max\_features=auto, max\_depth=30, bootstrap=True, total=   1.8s
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=True, total=   5.9s
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=200, min\_samples\_leaf=500, max\_features=auto, max\_depth=30, bootstrap=True, total=   2.0s
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   1.1s
+[CV]  n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=True, total=   5.5s
+[CV] n\_estimators=400, min\_samples\_split=5, min\_samples\_leaf=10, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV] n\_estimators=400, min\_samples\_split=5, min\_samples\_leaf=10, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   1.1s
+[CV] n\_estimators=400, min\_samples\_split=5, min\_samples\_leaf=10, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   1.2s
+[CV] n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   0.6s
+[CV] n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=5, min\_samples\_leaf=10, max\_features=auto, max\_depth=60, bootstrap=True, total=   1.3s
+[CV] n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=5, min\_samples\_leaf=10, max\_features=auto, max\_depth=60, bootstrap=True, total=   1.3s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=5, min\_samples\_leaf=10, max\_features=auto, max\_depth=60, bootstrap=True, total=   1.5s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   0.7s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=200, min\_samples\_split=200, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   0.7s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   5.3s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   4.9s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   4.9s
+[CV] n\_estimators=2000, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=100, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=None, bootstrap=False, total=   5.6s
+[CV] n\_estimators=2000, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=100, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=None, bootstrap=False, total=   4.9s
+[CV] n\_estimators=2000, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=100, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=None, bootstrap=False, total=   4.9s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=100, bootstrap=False, total=   5.3s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=100, bootstrap=False, total=   5.2s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   4.0s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   4.1s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   4.1s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=100, bootstrap=False, total=   5.6s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=90, bootstrap=False, total=   1.6s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   3.8s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   3.7s
+[CV] n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=90, bootstrap=False, total=   1.3s
+[CV] n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   3.8s
+[CV] n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False, total=   0.9s
+[CV] n\_estimators=1600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=90, bootstrap=False, total=   1.4s
+[CV] n\_estimators=1600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False, total=   0.9s
+[CV] n\_estimators=1600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False, total=   0.9s
+[CV] n\_estimators=2000, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   4.0s
+[CV] n\_estimators=2000, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   4.1s
+[CV] n\_estimators=2000, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   3.9s
+[CV] n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True, total=   4.9s
+[CV] n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   4.3s
+[CV] n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True, total=   4.6s
+[CV] n\_estimators=1200, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True, total=   4.6s
+[CV] n\_estimators=1200, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   4.7s
+[CV] n\_estimators=1200, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=40, bootstrap=True, total=   2.8s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=40, bootstrap=True, total=   2.8s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=40, bootstrap=True, total=   2.9s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=False, total=   1.5s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=False, total=   1.5s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   4.6s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=False, total=   1.5s
+[CV] n\_estimators=1600, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   4.9s
+[CV] n\_estimators=1600, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   5.0s
+[CV] n\_estimators=1600, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   4.9s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=auto, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=auto, max\_depth=20, bootstrap=True, total=   4.1s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=auto, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=auto, max\_depth=80, bootstrap=False, total=   1.3s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=auto, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=auto, max\_depth=80, bootstrap=False, total=   1.4s
+[CV] n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=auto, max\_depth=80, bootstrap=False, total=   1.4s
+[CV] n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=auto, max\_depth=20, bootstrap=True, total=   3.8s
+[CV] n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=auto, max\_depth=20, bootstrap=True, total=   3.8s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.3s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.3s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.3s
+[CV] n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   3.3s
+[CV] n\_estimators=1800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   3.3s
+[CV] n\_estimators=1800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   0.5s
+[CV] n\_estimators=1800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   3.3s
+[CV] n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   1.3s
+[CV] n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   1.5s
+[CV] n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=100, bootstrap=True, total=   4.4s
+[CV] n\_estimators=1600, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=100, bootstrap=True, total=   4.4s
+[CV] n\_estimators=1600, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=100, bootstrap=True, total=   4.5s
+[CV] n\_estimators=1600, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   1.4s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.3s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=None, bootstrap=True, total=   3.7s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.4s
+[CV] n\_estimators=1200, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=None, bootstrap=True, total=   3.6s
+[CV] n\_estimators=1200, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=None, bootstrap=True, total=   3.9s
+[CV] n\_estimators=1200, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=500, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.5s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=None, bootstrap=True, total=   2.8s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=None, bootstrap=True, total=   2.7s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=None, bootstrap=True, total=   2.7s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True, total=   1.9s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True, total=   1.8s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True, total=   1.9s
+[CV] n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   2.1s
+[CV] n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   2.1s
+[CV] n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   2.0s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=auto, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True, total=   1.9s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=auto, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True, total=   1.9s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=auto, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=500, max\_features=auto, max\_depth=None, bootstrap=True, total=   2.0s
+[CV] n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   1.4s
+[CV] n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=auto, max\_depth=10, bootstrap=False, total=   3.3s
+[CV] n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=auto, max\_depth=10, bootstrap=False, total=   3.3s
+[CV] n\_estimators=1600, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=auto, max\_depth=10, bootstrap=False, total=   3.2s
+[CV] n\_estimators=1600, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   1.6s
+[CV] n\_estimators=1600, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   1.5s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False, total=   3.9s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False, total=   3.8s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=50, min\_samples\_leaf=5, max\_features=auto, max\_depth=60, bootstrap=False, total=   3.7s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   4.9s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False, total=   3.1s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   5.4s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   5.3s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False, total=   3.6s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False, total=   3.5s
+[CV] n\_estimators=400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   0.8s
+[CV] n\_estimators=400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=90, bootstrap=True, total=   3.3s
+[CV] n\_estimators=400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   0.9s
+[CV] n\_estimators=600, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=90, bootstrap=True, total=   3.4s
+[CV] n\_estimators=600, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=auto, max\_depth=90, bootstrap=True, total=   3.3s
+[CV] n\_estimators=600, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=200, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=40, bootstrap=False, total=   1.0s
+[CV] n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=True, total=   1.4s
+[CV] n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=True, total=   1.5s
+[CV] n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=20, bootstrap=True 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=-1)]: Done 154 tasks      | elapsed:  1.9min
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[CV]  n\_estimators=600, min\_samples\_split=2, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=True, total=   1.5s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   2.8s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=50, bootstrap=True, total=   1.9s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   2.9s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=20, bootstrap=True, total=   2.9s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=50, bootstrap=True, total=   2.0s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=50, bootstrap=True, total=   2.0s
+[CV] n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   0.8s
+[CV] n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   0.9s
+[CV] n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   3.8s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   3.7s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   1.0s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   3.7s
+[CV] n\_estimators=1200, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   1.9s
+[CV] n\_estimators=1200, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   1.9s
+[CV] n\_estimators=1200, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.0s
+[CV] n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=10, bootstrap=False, total=   3.7s
+[CV] n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=10, bootstrap=False, total=   3.9s
+[CV] n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=10, min\_samples\_leaf=2, max\_features=auto, max\_depth=10, bootstrap=False, total=   3.7s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=100, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=False, total=   4.8s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=100, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=False, total=   5.0s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=100, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=30, bootstrap=False, total=   5.0s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=100, bootstrap=False, total=   4.9s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=100, bootstrap=False, total=   5.1s
+[CV] n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=100, bootstrap=False, total=   4.1s
+[CV] n\_estimators=600, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=100, bootstrap=True, total=   1.5s
+[CV] n\_estimators=600, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True, total=   5.3s
+[CV] n\_estimators=600, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True, total=   5.3s
+[CV] n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=50, max\_features=auto, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=50, max\_features=auto, max\_depth=30, bootstrap=False, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=50, max\_features=auto, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=50, max\_features=auto, max\_depth=30, bootstrap=False, total=   0.5s
+[CV] n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=50, max\_features=auto, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=100, bootstrap=True, total=   1.7s
+[CV] n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=200, min\_samples\_split=100, min\_samples\_leaf=50, max\_features=auto, max\_depth=30, bootstrap=False, total=   0.5s
+[CV] n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=50, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=100, bootstrap=True, total=   1.8s
+[CV] n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=2, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True, total=   5.3s
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=80, bootstrap=True, total=   2.0s
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=80, bootstrap=True, total=   2.0s
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=80, bootstrap=True, total=   2.2s
+[CV] n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=60, bootstrap=True, total=   2.9s
+[CV] n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True, total=   0.9s
+[CV] n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True, total=   1.0s
+[CV] n\_estimators=1600, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=10, bootstrap=True, total=   1.0s
+[CV] n\_estimators=1600, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=60, bootstrap=True, total=   2.9s
+[CV] n\_estimators=1600, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=50, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=60, bootstrap=True, total=   2.9s
+[CV] n\_estimators=1200, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=50, bootstrap=True, total=   3.6s
+[CV] n\_estimators=1200, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   2.9s
+[CV] n\_estimators=1200, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=50, bootstrap=True, total=   3.8s
+[CV] n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1600, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=50, bootstrap=True, total=   3.7s
+[CV] n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.2s
+[CV] n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=False 
+[CV]  n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.1s
+[CV] n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   3.0s
+[CV] n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   3.2s
+[CV] n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=1000, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=10, bootstrap=False, total=   2.3s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=80, bootstrap=True, total=   4.6s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=80, bootstrap=True, total=   4.5s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=80, bootstrap=True, total=   4.5s
+[CV] n\_estimators=2000, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   3.2s
+[CV] n\_estimators=2000, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   3.4s
+[CV] n\_estimators=2000, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=2, max\_features=auto, max\_depth=20, bootstrap=True, total=   3.2s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   1.4s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   4.6s
+[CV] n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=70, bootstrap=False 
+[CV]  n\_estimators=2000, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   4.7s
+[CV] n\_estimators=1800, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   1.4s
+[CV] n\_estimators=1800, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=70, bootstrap=False, total=   1.4s
+[CV] n\_estimators=1800, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=100, bootstrap=True 
+[CV]  n\_estimators=2000, min\_samples\_split=200, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   5.0s
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False, total=   1.1s
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=100, bootstrap=True, total=   4.8s
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False, total=   1.0s
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False, total=   1.0s
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=100, bootstrap=True, total=   5.0s
+[CV] n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=10, min\_samples\_leaf=500, max\_features=auto, max\_depth=100, bootstrap=True, total=   4.8s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False, total=   2.7s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False, total=   1.8s
+[CV] n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False, total=   2.7s
+[CV] n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=2, min\_samples\_leaf=500, max\_features=auto, max\_depth=20, bootstrap=False, total=   2.8s
+[CV] n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=70, bootstrap=True, total=   1.0s
+[CV] n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=70, bootstrap=True, total=   1.0s
+[CV] n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False, total=   2.0s
+[CV] n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=50, min\_samples\_leaf=10, max\_features=sqrt, max\_depth=None, bootstrap=False, total=   2.0s
+[CV] n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=500, max\_features=auto, max\_depth=70, bootstrap=True, total=   1.0s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.0s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.0s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=80, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.0s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   3.1s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=80, bootstrap=True, total=   4.2s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=80, bootstrap=True, total=   4.0s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=100, max\_features=auto, max\_depth=80, bootstrap=True, total=   4.0s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   3.2s
+[CV] n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   3.2s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False, total=   3.1s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False, total=   3.2s
+[CV] n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=50, min\_samples\_leaf=100, max\_features=sqrt, max\_depth=80, bootstrap=False, total=   3.1s
+[CV] n\_estimators=1400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=60, bootstrap=False, total=   4.0s
+[CV] n\_estimators=1400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=60, bootstrap=False, total=   3.9s
+[CV] n\_estimators=1400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=False 
+[CV]  n\_estimators=1800, min\_samples\_split=500, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=60, bootstrap=False, total=   3.9s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=False, total=   3.3s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=False, total=   3.3s
+[CV] n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=100, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=60, bootstrap=False, total=   3.3s
+[CV] n\_estimators=1800, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True, total=   3.4s
+[CV] n\_estimators=1800, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True, total=   4.0s
+[CV] n\_estimators=1800, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=10, min\_samples\_leaf=10, max\_features=auto, max\_depth=90, bootstrap=True, total=   3.8s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   4.6s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   4.6s
+[CV] n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=100, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   4.3s
+[CV] n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=30, bootstrap=True, total=   3.8s
+[CV] n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=30, bootstrap=True, total=   3.6s
+[CV] n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=30, bootstrap=True 
+[CV]  n\_estimators=1600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=auto, max\_depth=30, bootstrap=True, total=   3.6s
+[CV] n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=50, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   2.8s
+[CV] n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=50, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=50, bootstrap=False, total=   1.4s
+[CV] n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=50, bootstrap=False 
+[CV]  n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   2.8s
+[CV] n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=1200, min\_samples\_split=50, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=30, bootstrap=True, total=   2.8s
+[CV] n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=50, bootstrap=False, total=   1.5s
+[CV] n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=10, min\_samples\_leaf=50, max\_features=sqrt, max\_depth=50, bootstrap=False, total=   1.5s
+[CV] n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   4.3s
+[CV] n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   3.4s
+[CV] n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   4.4s
+[CV] n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=200, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=1800, min\_samples\_split=2, min\_samples\_leaf=200, max\_features=auto, max\_depth=60, bootstrap=True, total=   4.8s
+[CV] n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=200, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=200, max\_features=auto, max\_depth=10, bootstrap=True, total=   1.4s
+[CV] n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=200, max\_features=auto, max\_depth=10, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=200, max\_features=auto, max\_depth=10, bootstrap=True, total=   1.2s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=400, min\_samples\_split=100, min\_samples\_leaf=200, max\_features=auto, max\_depth=10, bootstrap=True, total=   1.1s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   4.7s
+[CV] n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=5, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=70, bootstrap=True, total=   4.4s
+[CV] n\_estimators=1400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=False, total=   3.7s
+[CV] n\_estimators=1400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=False, total=   3.6s
+[CV] n\_estimators=1400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=20, bootstrap=False 
+[CV]  n\_estimators=1400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=20, bootstrap=False, total=   3.2s
+[CV] n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=200, min\_samples\_leaf=50, max\_features=auto, max\_depth=40, bootstrap=False, total=   3.3s
+[CV] n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=20, bootstrap=False, total=   3.2s
+[CV] n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=70, bootstrap=True, total=   1.5s
+[CV]  n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=70, bootstrap=True, total=   1.7s
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=1400, min\_samples\_split=500, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=20, bootstrap=False, total=   3.7s
+[CV] n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   1.6s
+[CV] n\_estimators=1000, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   1.7s
+[CV] n\_estimators=1000, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=5, min\_samples\_leaf=2, max\_features=auto, max\_depth=70, bootstrap=True, total=   2.9s
+[CV] n\_estimators=1000, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=auto, max\_depth=70, bootstrap=True 
+[CV]  n\_estimators=400, min\_samples\_split=500, min\_samples\_leaf=5, max\_features=sqrt, max\_depth=40, bootstrap=True, total=   1.9s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=1000, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=auto, max\_depth=70, bootstrap=True, total=   3.3s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=1000, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=auto, max\_depth=70, bootstrap=True, total=   3.4s
+[CV] n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=90, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   2.1s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=1000, min\_samples\_split=10, min\_samples\_leaf=100, max\_features=auto, max\_depth=70, bootstrap=True, total=   2.9s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.4s
+[CV] n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=True 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   1.9s
+[CV] n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=800, min\_samples\_split=10, min\_samples\_leaf=200, max\_features=sqrt, max\_depth=90, bootstrap=False, total=   1.8s
+[CV] n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.5s
+[CV] n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=30, bootstrap=False 
+[CV]  n\_estimators=600, min\_samples\_split=500, min\_samples\_leaf=2, max\_features=sqrt, max\_depth=90, bootstrap=True, total=   1.4s
+[CV]  n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=30, bootstrap=False, total=   3.0s
+[CV]  n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=30, bootstrap=False, total=   3.0s
+[CV]  n\_estimators=1600, min\_samples\_split=100, min\_samples\_leaf=100, max\_features=auto, max\_depth=30, bootstrap=False, total=   2.9s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=-1)]: Done 300 out of 300 | elapsed:  3.7min finished
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} RandomizedSearchCV(cv=3, error\_score='raise',
+                   estimator=RandomForestClassifier(bootstrap=True, class\_weight=None, criterion='gini',
+                     max\_depth=None, max\_features='auto', max\_leaf\_nodes=None,
+                     min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                     min\_samples\_leaf=1, min\_samples\_split=2,
+                     min\_weight\_fraction\_leaf=0.0, n\_estimators=10, n\_jobs=1,
+                     oob\_score=False, random\_state=None, verbose=0,
+                     warm\_start=False),
+                   fit\_params=None, iid=True, n\_iter=100, n\_jobs=-1,
+                   param\_distributions=\{'n\_estimators': [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000], 'max\_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, None], 'min\_samples\_split': [2, 5, 10, 50, 100, 200, 500], 'min\_samples\_leaf': [2, 5, 10, 50, 100, 200, 500], 'max\_features': ['auto', 'sqrt'], 'bootstrap': [True, False]\},
+                   pre\_dispatch='2*n\_jobs', random\_state=42, refit=True,
+                   return\_train\_score='warn', scoring=None, verbose=2)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{rfc\PYZus{}random}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} \{'n\_estimators': 800,
+          'min\_samples\_split': 50,
+          'min\_samples\_leaf': 5,
+          'max\_features': 'sqrt',
+          'max\_depth': 90,
+          'bootstrap': True\}
+\end{Verbatim}
+            
+    \paragraph{Now we can compare the base model with the best random search
+model.}\label{now-we-can-compare-the-base-model-with-the-best-random-search-model.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{best\PYZus{}random} \PY{o}{=} \PY{n}{rfc\PYZus{}random}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+         \PY{n}{best\PYZus{}random\PYZus{}pred} \PY{o}{=} \PY{n}{best\PYZus{}random}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{best\PYZus{}random\PYZus{}accuracy} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{best\PYZus{}random\PYZus{}pred}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Base Model Accuracy: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{accuracy}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Best Random Model Accuracy: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{best\PYZus{}random\PYZus{}accuracy}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Improvement: }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mi}{100}\PY{o}{*}\PY{p}{(}\PY{n}{best\PYZus{}random\PYZus{}accuracy}\PY{o}{\PYZhy{}}\PY{n}{accuracy}\PY{p}{)}\PY{o}{/}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Base Model Accuracy:  0.8241758241758241
+Best Random Model Accuracy:  0.8351648351648352
+Improvement: 1.33\%.
+
+    \end{Verbatim}
+
+    \section{Grid Search with Cross
+Validation}\label{grid-search-with-cross-validation}
+
+    \paragraph{Instead of randomly sampling from a grid, Grid Search looks
+at every combination. Since random search has helped us find the
+ballpark of what values we want to use for hyperparameters, we can use
+GridSearchCV to find better
+values.}\label{instead-of-randomly-sampling-from-a-grid-grid-search-looks-at-every-combination.-since-random-search-has-helped-us-find-the-ballpark-of-what-values-we-want-to-use-for-hyperparameters-we-can-use-gridsearchcv-to-find-better-values.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+         
+         \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}estimators}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{700}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{900}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min\PYZus{}samples\PYZus{}split}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{60}\PY{p}{,} \PY{l+m+mi}{70}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min\PYZus{}samples\PYZus{}leaf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{90}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{110}\PY{p}{,} \PY{l+m+mi}{120}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bootstrap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{k+kc}{True}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{base\PYZus{}rfc} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+         
+         \PY{n}{grid\PYZus{}search} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{estimator}\PY{o}{=}\PY{n}{base\PYZus{}rfc}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{param\PYZus{}grid}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{grid\PYZus{}search}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 3 folds for each of 288 candidates, totalling 864 fits
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=-1)]: Done  42 tasks      | elapsed:   22.1s
+[Parallel(n\_jobs=-1)]: Done 192 tasks      | elapsed:  1.6min
+[Parallel(n\_jobs=-1)]: Done 442 tasks      | elapsed:  3.6min
+[Parallel(n\_jobs=-1)]: Done 792 tasks      | elapsed:  6.5min
+[Parallel(n\_jobs=-1)]: Done 864 out of 864 | elapsed:  7.0min finished
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}85}]:} GridSearchCV(cv=3, error\_score='raise',
+                estimator=RandomForestClassifier(bootstrap=True, class\_weight=None, criterion='gini',
+                     max\_depth=None, max\_features='auto', max\_leaf\_nodes=None,
+                     min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                     min\_samples\_leaf=1, min\_samples\_split=2,
+                     min\_weight\_fraction\_leaf=0.0, n\_estimators=10, n\_jobs=1,
+                     oob\_score=False, random\_state=42, verbose=0, warm\_start=False),
+                fit\_params=None, iid=True, n\_jobs=-1,
+                param\_grid=\{'n\_estimators': [700, 800, 900], 'min\_samples\_split': [40, 50, 60, 70], 'min\_samples\_leaf': [4, 5, 6], 'max\_features': [3, 4], 'max\_depth': [90, 100, 110, 120], 'bootstrap': [True]\},
+                pre\_dispatch='2*n\_jobs', refit=True, return\_train\_score='warn',
+                scoring=None, verbose=1)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{grid\PYZus{}search}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}86}]:} \{'bootstrap': True,
+          'max\_depth': 90,
+          'max\_features': 3,
+          'min\_samples\_leaf': 4,
+          'min\_samples\_split': 40,
+          'n\_estimators': 700\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{best\PYZus{}grid} \PY{o}{=} \PY{n}{grid\PYZus{}search}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+         \PY{n}{best\PYZus{}grid\PYZus{}pred} \PY{o}{=} \PY{n}{best\PYZus{}grid}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{best\PYZus{}grid\PYZus{}accuracy} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{best\PYZus{}grid\PYZus{}pred}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Best Grid Model Accuracy: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{best\PYZus{}grid\PYZus{}accuracy}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Improvement: }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mi}{100}\PY{o}{*}\PY{p}{(}\PY{n}{best\PYZus{}grid\PYZus{}accuracy}\PY{o}{\PYZhy{}}\PY{n}{accuracy}\PY{p}{)}\PY{o}{/}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best Grid Model Accuracy:  0.8571428571428571
+Improvement: 4.00\%.
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
